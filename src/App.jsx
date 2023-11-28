@@ -1,33 +1,33 @@
-import "./App.css";
-import React from "react";
-import { Container, Navbar, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import MoneyTree from "./moneytree";
-import questions from "./questions";
+import QuestionsArray from "./questions-list";
 
 function App() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
   return (
     <>
-      <div className="section">
-        <div className="logo">
-          <img src="WWTBAMUS2020Logo.png" alt="WWTBAM image"></img>
-        </div>
-        {/* <h1>Who wants to be a Millionaire</h1> */}
-        <div className="lifeline">
-          <ul className="lifeline-buttons">
-            <li>
-              <Button variant="success">50:50</Button>
-            </li>
-            <li>
-              <Button variant="outline-primary">Phone a Friend</Button>
-            </li>
-            <li>
-              <Button variant="outline-primary">Audience</Button>
-            </li>
-          </ul>
-        </div>
-        <div className="moneytree">
-          <MoneyTree />
-        </div>
+      <div className="logo">
+        <img src="WWTBAMUS2020Logo.png" alt="WWTBAM image" />
+      </div>
+
+      <div className="lifeline">
+        <ul className="lifeline-buttons">
+          <li>
+            <Button>50:50</Button>
+          </li>
+          <li>
+            <Button>Phone a Friend</Button>
+          </li>
+          <li>
+            <Button>Audience</Button>
+          </li>
+        </ul>
+      </div>
+
+      <div className="moneytree">
+        <MoneyTree />
       </div>
     </>
   );

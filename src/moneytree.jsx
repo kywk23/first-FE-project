@@ -2,54 +2,33 @@ import React from "react";
 import "./App.css";
 
 const MoneyTree = () => {
+  const moneyTreeList = [
+    { level: 15, prize: "$1,000,000" },
+    { level: 14, prize: "$500,000" },
+    { level: 13, prize: "$250,000" },
+    { level: 12, prize: "$125,000" },
+    { level: 11, prize: "$64,000" },
+    { level: 10, prize: "$32,000" },
+    { level: 9, prize: "$16,000" },
+    { level: 8, prize: "$8,000" },
+    { level: 7, prize: "$4,000" },
+    { level: 6, prize: "$2,000" },
+    { level: 5, prize: "$1,000" },
+    { level: 4, prize: "$500" },
+    { level: 3, prize: "$300" },
+    { level: 2, prize: "$200" },
+    { level: 1, prize: "$100" },
+  ];
+
   return (
-    <>
-      <p>
-        <span>15</span> $1,000,000
-      </p>
-      <p>
-        <span>14</span> $500,000
-      </p>
-      <p>
-        <span>13</span> $250,000
-      </p>
-      <p>
-        <span>12</span> $125,000
-      </p>
-      <p>
-        <span>11</span> $64,000
-      </p>
-      <p>
-        <span>10</span> $32,000
-      </p>
-      <p>
-        <span>9</span> $16,000
-      </p>
-      <p>
-        <span>8</span> $8,000
-      </p>
-      <p>
-        <span>7</span> $4,000
-      </p>
-      <p>
-        <span>6</span> $2,000
-      </p>
-      <p>
-        <span>5</span> $1,000
-      </p>
-      <p>
-        <span>4</span> $500
-      </p>
-      <p>
-        <span>3</span> $300
-      </p>
-      <p>
-        <span>2</span> $200
-      </p>
-      <p>
-        <span>1</span> $100
-      </p>
-    </>
+    <ul className="money-tree">
+      {moneyTreeList.map((item) => (
+        <li key={item.level} className="money-tree-item">
+          <span className="money-tree-level-num">{item.level}</span>
+          <span className="money-tree-prize-amt">{item.prize}</span>
+        </li>
+      ))}
+    </ul>
   );
 };
 

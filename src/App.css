@@ -1,26 +1,34 @@
-.moneytree {
+.money-tree {
   background-color: rgb(103, 100, 186);
-  padding: 2em;
   border: 1px solid #f6f6f6;
-  border-radius: 8px;
+  border-radius: 15px;
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.moneytree p {
+.money-tree li {
+  list-style: none;
+}
+
+.money-tree-item {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 75%;
   font-size: 1em;
   font-weight: bold;
-  border: 2px solid #ffffff;
-  color: rgb(255, 255, 255);
+  border: 2px solid #d6c3c3;
+  color: #1ecf3e;
   border-radius: 50%;
-  padding: 1px;
-  transition: background-color 0.3s;
+  padding: 8px;
+  margin: 8px;
+  transition: background-color 0.8s;
 }
 
-.moneytree p:hover {
-  background-color: #1ecf3e;
+.money-tree-item:hover {
+  background-color: #e37c28;
 }
 
 .lifeline-buttons {
