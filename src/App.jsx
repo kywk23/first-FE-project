@@ -2,27 +2,24 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import MoneyTree from "./moneytree";
 import QuestionsArrayList from "./questions-list";
+import getRandomQuestion from "./randomquestion.jsx";
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [restartGame, setRestartGame] = useState(false);
 
-  const handleOptionClick = (option) => {
-    const currentQuestion = QuestionsArrayList[currentQuestionIndex];
-    // const renderedQuestion = QuestionsArrayList.filter((question) => question.level === currentLevel)[0];
-    if (option === renderedQuestion.correctAnswer) {
-      setCurrentLevel(currentLevel + 1);
-    } else {
-      alert("Wrong answer");
-      setRestartGame(true);
-    }
-  };
+  const randomQuestion = getRandomQuestion(currentLevel);
 
-  // const randomQuestionIndex = (level) => {
-  //   const levelQuestions = QuestionsArrayList.filter((question) => question.level === level);
-  //   const randomIndex = Math.floor(Math.random() * levelQuestions.length);
-  //   return randomIndex;
+  // const handleOptionClick = (option) => {
+  //   const currentQuestion = QuestionsArrayList[currentQuestionIndex];
+  //   // const renderedQuestion = QuestionsArrayList.filter((question) => question.level === currentLevel)[0];
+  //   if (option === renderedQuestion.correctAnswer) {
+  //     setCurrentLevel(currentLevel + 1);
+  //   } else {
+  //     alert("Wrong answer");
+  //     setRestartGame(true);
+  //   }
   // };
 
   //states =
@@ -55,22 +52,18 @@ function App() {
       </div>
 
       <div className="questions">
-        {QuestionsArrayList.map((question) => {
-          if (question.level === currentLevel) {
-            return (
-              <div key={question.id} className="question">
-                <h2>{question.question}</h2>
-                <ul className="options">
-                  {question.options.map((option, i) => (
-                    <Button key={i} onClick={() => handleOptionClick(option)}>
-                      {option}
-                    </Button>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-        })}
+        {randomQuestion && randomQuestion.level === currentLevel && (
+          <div key={randomQuestion.id} className="question">
+            <h2>{randomQuestion.question}</h2>
+            <ul className="options">
+              {randomQuestion.options.map((option, i) => (
+                <Button key={i} onClick={() => handleOptionClick(option)}>
+                  {option}
+                </Button>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </>
   );

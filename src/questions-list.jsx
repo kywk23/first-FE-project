@@ -10,7 +10,6 @@ import "./App.css";
 // track answer user put in:
 // based off answers, win-lose scenarios
 
-// const QuestionsArrayList = () => {
 const QuestionsArrayList = [
   {
     id: 1,
@@ -41,8 +40,5 @@ const QuestionsArrayList = [
     level: 1,
   },
 ];
-
-// return QuestionsArrayList;
-// };
 
 export default QuestionsArrayList;
