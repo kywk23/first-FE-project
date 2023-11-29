@@ -9,7 +9,8 @@ function App() {
   const [restartGame, setRestartGame] = useState(false);
 
   const handleOptionClick = (option) => {
-    const renderedQuestion = QuestionsArrayList.filter((question) => question.level === currentLevel)[0];
+    const currentQuestion = QuestionsArrayList[currentQuestionIndex];
+    // const renderedQuestion = QuestionsArrayList.filter((question) => question.level === currentLevel)[0];
     if (option === renderedQuestion.correctAnswer) {
       setCurrentLevel(currentLevel + 1);
     } else {
@@ -18,7 +19,12 @@ function App() {
     }
   };
 
-  // const level1Question = QuestionsArrayList.filter((question) => question.level === 1);
+  // const randomQuestionIndex = (level) => {
+  //   const levelQuestions = QuestionsArrayList.filter((question) => question.level === level);
+  //   const randomIndex = Math.floor(Math.random() * levelQuestions.length);
+  //   return randomIndex;
+  // };
+
   //states =
   // capture statue of user's answer. validate that state against question array: element
   //useState to capture information - when user clicks.
@@ -56,9 +62,9 @@ function App() {
                 <h2>{question.question}</h2>
                 <ul className="options">
                   {question.options.map((option, i) => (
-                    <li key={i} onClick={() => handleOptionClick(option)}>
+                    <Button key={i} onClick={() => handleOptionClick(option)}>
                       {option}
-                    </li>
+                    </Button>
                   ))}
                 </ul>
               </div>

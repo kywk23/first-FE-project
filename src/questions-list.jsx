@@ -18,8 +18,6 @@ const QuestionsArrayList = [
     options: ["1957", "1965", "1971", "1980"],
     correctAnswer: "1965",
     level: 1,
-
-    // e,g lvl 1. filter method to find lvl 1 questions.
   },
   {
     id: 2,
@@ -30,10 +28,17 @@ const QuestionsArrayList = [
   },
   {
     id: 3,
+    question: "who train pikachu",
+    options: ["me", "you", "ash", "brock"],
+    correctAnswer: "you",
+    level: 1,
+  },
+  {
+    id: 4,
     question: "Who succeeded Lee Kuan Yew as the Prime Minister of Singapore?",
     options: ["Goh Chok Tong", "Tony Tan Keng Yam", "Tharman Shanmugaratnam", "Lee Hsien Loong"],
     correctAnswer: "Lee Hsien Loong",
-    level: 2,
+    level: 1,
   },
 ];
 
