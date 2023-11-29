@@ -1,10 +1,28 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import MoneyTree from "./moneytree";
-import QuestionsArray from "./questions-list";
+import QuestionsArrayList from "./questions-list";
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState(1);
+  const [restartGame, setRestartGame] = useState(false);
+
+  const handleOptionClick = (option) => {
+    const renderedQuestion = QuestionsArrayList.filter((question) => question.level === currentLevel)[0];
+    if (option === renderedQuestion.correctAnswer) {
+      setCurrentLevel(currentLevel + 1);
+    } else {
+      alert("Wrong answer");
+      setRestartGame(true);
+    }
+  };
+
+  // const level1Question = QuestionsArrayList.filter((question) => question.level === 1);
+  //states =
+  // capture statue of user's answer. validate that state against question array: element
+  //useState to capture information - when user clicks.
+  //useEffect to check on answers - trigger an action based on change in state
 
   return (
     <>
@@ -27,7 +45,26 @@ function App() {
       </div>
 
       <div className="moneytree">
-        <MoneyTree />
+        <MoneyTree currentLevel={currentLevel} />
+      </div>
+
+      <div className="questions">
+        {QuestionsArrayList.map((question) => {
+          if (question.level === currentLevel) {
+            return (
+              <div key={question.id} className="question">
+                <h2>{question.question}</h2>
+                <ul className="options">
+                  {question.options.map((option, i) => (
+                    <li key={i} onClick={() => handleOptionClick(option)}>
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          }
+        })}
       </div>
     </>
   );
