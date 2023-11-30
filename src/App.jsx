@@ -1,69 +1,105 @@
-import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container } from "react-bootstrap";
 import MoneyTree from "./moneytree";
 import QuestionsArrayList from "./questions-list";
 import getRandomQuestion from "./randomquestion.jsx";
 
+("use strict");
+
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);
-  const [restartGame, setRestartGame] = useState(false);
+  const [winLose, setWinLose] = useState(null);
+  // const [remainingTime, setRemainingTime] = useState(60);
 
   const randomQuestion = getRandomQuestion(currentLevel);
+  const resetGame = () => {
+    setCurrentLevel(1);
+    setWinLose(null);
+  };
 
-  // const handleOptionClick = (option) => {
-  //   const currentQuestion = QuestionsArrayList[currentQuestionIndex];
-  //   // const renderedQuestion = QuestionsArrayList.filter((question) => question.level === currentLevel)[0];
-  //   if (option === renderedQuestion.correctAnswer) {
-  //     setCurrentLevel(currentLevel + 1);
-  //   } else {
-  //     alert("Wrong answer");
-  //     setRestartGame(true);
+  // useEffect(() => {
+  //   // Decrease the remaining time every second
+  //   const timer = setInterval(() => {
+  //     setRemainingTime((prevTime) => prevTime - 1);
+  //   }, 1000);
+
+  //   // Clean up the timer when the component unmounts
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   if (remainingTime === 0) {
+  //     alert("times up");
   //   }
-  // };
+  // }, [remainingTime]);
 
-  //states =
-  // capture statue of user's answer. validate that state against question array: element
-  //useState to capture information - when user clicks.
-  //useEffect to check on answers - trigger an action based on change in state
+  const handleOptionClick = (option) => {
+    if (randomQuestion) {
+      if (option === randomQuestion.correctAnswer) {
+        setCurrentLevel(currentLevel + 1);
+      }
+      if (currentLevel < 5 && option !== randomQuestion.correctAnswer) {
+        alert("so fast lose");
+        resetGame();
+      } else if (currentLevel > 5 && currentLevel <= 10 && option !== randomQuestion.correctAnswer) {
+        alert("you lost and you walk away with $1,000");
+        resetGame();
+      } else if (currentLevel > 10 && option !== randomQuestion.correctAnswer) {
+        alert("you lost and you walk away with $32,000");
+        resetGame();
+      }
+      if (currentLevel + 1 === 16) {
+        setWinLose("win");
+        console.log(`user beats the game`);
+      }
+    }
+  };
 
   return (
     <>
-      <div className="logo">
-        <img src="WWTBAMUS2020Logo.png" alt="WWTBAM image" />
-      </div>
-
-      <div className="lifeline">
-        <ul className="lifeline-buttons">
-          <li>
-            <Button>50:50</Button>
-          </li>
-          <li>
-            <Button>Phone a Friend</Button>
-          </li>
-          <li>
-            <Button>Audience</Button>
-          </li>
-        </ul>
-      </div>
-
-      <div className="moneytree">
-        <MoneyTree currentLevel={currentLevel} />
-      </div>
-
-      <div className="questions">
-        {randomQuestion && randomQuestion.level === currentLevel && (
-          <div key={randomQuestion.id} className="question">
-            <h2>{randomQuestion.question}</h2>
-            <ul className="options">
-              {randomQuestion.options.map((option, i) => (
-                <Button key={i} onClick={() => handleOptionClick(option)}>
-                  {option}
-                </Button>
-              ))}
+      <div className="app">
+        <div className="logo">
+          <img src="WWTBAMUS2020Logo.png" alt="WWTBAM image" />
+        </div>
+        <div className="main">
+          <div className="lifeline">
+            <ul className="lifeline-buttons">
+              <li>
+                <Button>50:50</Button>
+              </li>
+              <li>
+                <Button>Phone a Friend</Button>
+              </li>
+              <li>
+                <Button>Audience</Button>
+              </li>
             </ul>
           </div>
-        )}
+          <div className="moneytree">
+            <MoneyTree currentLevel={currentLevel} />
+          </div>
+
+          <Container>
+            <h2>Current level: {currentLevel}</h2>
+            <div className="questions">
+              {randomQuestion && randomQuestion.level === currentLevel && (
+                <div key={randomQuestion.id} className="question">
+                  <h2>{randomQuestion.question}</h2>
+                  <ul className="options">
+                    {randomQuestion.options.map((option, i) => (
+                      <Button variant="info" key={i} onClick={() => handleOptionClick(option)}>
+                        {option}
+                      </Button>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </Container>
+        </div>
       </div>
     </>
   );
