@@ -63,12 +63,11 @@ function App() {
       <div className="app">
         <div className="logo">
           <img src="WWTBAMUS2020Logo.png" alt="WWTBAM image" />
-        </div>
-        <div className="main">
+          {/* <div className="main"> */}
           <div className="lifeline">
             <ul className="lifeline-buttons">
               <li>
-                <Button>50:50</Button>
+                <Button variant="Success">50:50</Button>
               </li>
               <li>
                 <Button>Phone a Friend</Button>
@@ -78,28 +77,29 @@ function App() {
               </li>
             </ul>
           </div>
-          <div className="moneytree">
-            <MoneyTree currentLevel={currentLevel} />
-          </div>
-
-          <Container>
-            <h2>Current level: {currentLevel}</h2>
-            <div className="questions">
-              {randomQuestion && randomQuestion.level === currentLevel && (
-                <div key={randomQuestion.id} className="question">
-                  <h2>{randomQuestion.question}</h2>
-                  <ul className="options">
-                    {randomQuestion.options.map((option, i) => (
-                      <Button variant="info" key={i} onClick={() => handleOptionClick(option)}>
-                        {option}
-                      </Button>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </Container>
         </div>
+        <div className="moneytree">
+          <MoneyTree currentLevel={currentLevel} />
+        </div>
+
+        <Container>
+          <h2>Current level: {currentLevel}</h2>
+          <div className="questions">
+            {randomQuestion && randomQuestion.level === currentLevel && (
+              <div key={randomQuestion.id} className="question">
+                <h2>{randomQuestion.question}</h2>
+                <ul className="options">
+                  {randomQuestion.options.map((option, i) => (
+                    <Button variant="info" key={i} onClick={() => handleOptionClick(option)}>
+                      {option}
+                    </Button>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </Container>
+        {/* </div> */}
       </div>
     </>
   );
