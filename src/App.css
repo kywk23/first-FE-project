@@ -1,5 +1,6 @@
 .app {
-  margin: 1%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 1.5%;
   padding: 1%;
   color: rgb(10, 7, 7);
   background: linear-gradient(to bottom, rgb(8, 31, 91), #ffffff);
@@ -10,7 +11,7 @@
   justify-content: space-between;
   align-items: flex-start;
 }
-.logo img{
+.logo img {
   margin: 1em;
 }
 
@@ -18,76 +19,103 @@
   list-style: none;
   padding: 0;
   justify-content: center;
+  align-items: center;
   display: flex;
+}
+
+.lifeline-buttons li {
+  display: inline-block;
+  margin: 1em;
+  transition: background-color 0.8s;
 }
 
 .lifeline-buttons li:hover {
   background-color: #1ecf3e;
 }
-/* 
-.money-tree {
-  font-size: medium;
-  font-weight: bold;
-  background-color: rgb(103, 100, 186);
-  border: 1px solid #f6f6f6;
-  border-radius: 15px;
-  width: 40%;
 
-  display: flex-end;
+.moneytree {
+  background-color: rgb(26, 22, 137);
+  border: 1.5px solid #e0dbdb;
+  border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  width: 15em;
+  padding: 5px;
+}
+
+.money-tree {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .money-tree-item {
+  color: #e0ede2;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 1em;
-  font-weight: bold;
-  border: 2px solid #d6c3c3;
-  color: #1ecf3e;
-  border-radius: 50%;
-  padding: 6px;
-  margin: 6px;
-  transition: background-color 0.8s;
-  width: 70%;
   align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.8s;
+  width: 130%;
+  padding: 6px;
+  border-radius: 50%;
+  border: 2px solid #e6e6e6;
+  margin: 5%;
 }
-.money-tree li {
-  list-style: none;
-  padding: 5px;
-  transition: background-color 0.5s;
+
+.money-tree-item:last-child {
+  margin-bottom: 0;
 }
 
 .money-tree li:hover {
   background-color: #e37c28;
 }
 
-.lifeline-buttons {
-  list-style: none;
-  padding: 0;
-  justify-content: center;
-  display: flex;
-}
-
-.lifeline-buttons li {
-  margin-right: 2%;
-}
-
 .lifeline-buttons li:hover {
   background-color: #1ecf3e;
 }
 
-.questions {
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 10vh;
   width: 80%;
   margin: 20px auto;
+  position: relative;
+  position: absolute;
+  top: 40%;
+  left: 16%;
+}
+
+.container h2 {
+  font-size: 1.5em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.questions {
+  margin-left: 10px;
+  width: 80%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .question {
-  background-color: #f6f6f6;
+  background-color: rgb(255, 255, 255);
   border: 2px solid #d6c3c3;
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
-} */ */
+  justify-content: space-evenly;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

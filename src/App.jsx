@@ -3,14 +3,12 @@ import { Button, Container } from "react-bootstrap";
 import MoneyTree from "./moneytree";
 import QuestionsArrayList from "./questions-list";
 import getRandomQuestion from "./randomquestion.jsx";
-
-("use strict");
+import CountdownTimer from "./countdown-timer.jsx";
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [winLose, setWinLose] = useState(null);
-  // const [remainingTime, setRemainingTime] = useState(60);
 
   const randomQuestion = getRandomQuestion(currentLevel);
   const resetGame = () => {
@@ -18,23 +16,8 @@ function App() {
     setWinLose(null);
   };
 
-  // useEffect(() => {
-  //   // Decrease the remaining time every second
-  //   const timer = setInterval(() => {
-  //     setRemainingTime((prevTime) => prevTime - 1);
-  //   }, 1000);
-
-  //   // Clean up the timer when the component unmounts
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   if (remainingTime === 0) {
-  //     alert("times up");
-  //   }
-  // }, [remainingTime]);
+  //can store timer state here.
+  // set timer in own component.
 
   const handleOptionClick = (option) => {
     if (randomQuestion) {
@@ -57,49 +40,51 @@ function App() {
       }
     }
   };
+  // move winning logic to top-order
 
   return (
     <>
       <div className="app">
         <div className="logo">
           <img src="WWTBAMUS2020Logo.png" alt="WWTBAM image" />
-          {/* <div className="main"> */}
+
           <div className="lifeline">
             <ul className="lifeline-buttons">
               <li>
-                <Button variant="Success">50:50</Button>
+                <Button variant="outline-info">50:50</Button>
               </li>
               <li>
-                <Button>Phone a Friend</Button>
+                <Button variant="outline-info">Phone a Friend</Button>
               </li>
               <li>
-                <Button>Audience</Button>
+                <Button variant="outline-info">Audience</Button>
               </li>
             </ul>
           </div>
-        </div>
-        <div className="moneytree">
-          <MoneyTree currentLevel={currentLevel} />
-        </div>
 
-        <Container>
-          <h2>Current level: {currentLevel}</h2>
-          <div className="questions">
-            {randomQuestion && randomQuestion.level === currentLevel && (
-              <div key={randomQuestion.id} className="question">
-                <h2>{randomQuestion.question}</h2>
-                <ul className="options">
-                  {randomQuestion.options.map((option, i) => (
-                    <Button variant="info" key={i} onClick={() => handleOptionClick(option)}>
-                      {option}
-                    </Button>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <div className="moneytree">
+            <MoneyTree currentLevel={currentLevel} />
           </div>
-        </Container>
-        {/* </div> */}
+          <Container>
+            <h2>Current level: {currentLevel}</h2>
+            <CountdownTimer initialTime={60} onFinish={resetGame} />
+            <div className="questions">
+              {randomQuestion && randomQuestion.level === currentLevel && (
+                <div key={randomQuestion.id} className="question">
+                  <h2>{randomQuestion.question}</h2>
+                  <ul className="options">
+                    {randomQuestion.options.map((option, i) => (
+                      <Button variant="info" key={i} onClick={() => handleOptionClick(option)}>
+                        {option}
+                      </Button>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </Container>
+        </div>
+        {/* {remainingTime} */}
       </div>
     </>
   );
