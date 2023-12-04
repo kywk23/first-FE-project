@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
 
-const CountdownTimer = ({ initialTime, onFinish }) => {
-  const [remainingTime, setRemainingTime] = useState(initialTime);
+const CountDownTimer = ({ currentLevel, onFinish, setWinLose }) => {
+  const [remainingTime, setRemainingTime] = useState(200);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -13,17 +14,20 @@ const CountdownTimer = ({ initialTime, onFinish }) => {
 
     return () => {
       clearInterval(timer);
-      if (remainingTime === 0) {
-        onFinish();
-      }
     };
-  }, [remainingTime, onFinish]);
+  }, [onFinish]);
+
+  useEffect(() => {
+    if (remainingTime === 0) {
+      onFinish();
+    }
+  }, [remainingTime, onFinish, setWinLose]);
 
   return (
     <div>
-      <p>Time Remaining: {remainingTime} seconds</p>
+      <p>Remaining Time: {remainingTime} seconds</p>
     </div>
   );
 };
 
-export default CountdownTimer;
+export default CountDownTimer;

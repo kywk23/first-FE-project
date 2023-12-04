@@ -119,3 +119,10 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+.money-tree-item.active {
+  background-color: rgb(5, 135, 57);
+}
+.money-tree-level-num {
+  font-weight: bold;
+}

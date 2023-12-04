@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const MoneyTree = () => {
+const MoneyTree = ({ currentLevel }) => {
   const moneyTreeList = [
     { level: 15, prize: "$1,000,000" },
     { level: 14, prize: "$500,000" },
@@ -23,7 +23,7 @@ const MoneyTree = () => {
   return (
     <ul className="money-tree">
       {moneyTreeList.map((item) => (
-        <li key={item.level} className="money-tree-item">
+        <li key={item.level} className={currentLevel === item.level ? "money-tree-item active" : "money-tree-item"}>
           <span className="money-tree-level-num">{item.level}</span>
           <span className="money-tree-prize-amt">{item.prize}</span>
         </li>

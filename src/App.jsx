@@ -1,46 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Alert } from "react-bootstrap";
 import MoneyTree from "./moneytree";
 import QuestionsArrayList from "./questions-list";
 import getRandomQuestion from "./randomquestion.jsx";
-import CountdownTimer from "./countdown-timer.jsx";
+import CountDownTimer from "./countdown-timer.jsx";
 
 function App() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [winLose, setWinLose] = useState(null);
-
+  const [losingMessage, setLosingMessage] = useState("");
   const randomQuestion = getRandomQuestion(currentLevel);
+
+  useEffect(() => {
+    console.log({ currentLevel, winLose, losingMessage });
+  }, [currentLevel, winLose, losingMessage]);
+
+  const handleReset = () => {
+    setWinLose("lose");
+    console.log("Time's up! You lose.");
+    setLosingMessage("Time's up! You lose.");
+  };
+
   const resetGame = () => {
     setCurrentLevel(1);
     setWinLose(null);
+    setLosingMessage("");
+    // window.location.reload();
   };
-
-  //can store timer state here.
-  // set timer in own component.
 
   const handleOptionClick = (option) => {
     if (randomQuestion) {
-      if (option === randomQuestion.correctAnswer) {
-        setCurrentLevel(currentLevel + 1);
-      }
-      if (currentLevel < 5 && option !== randomQuestion.correctAnswer) {
-        alert("so fast lose");
-        resetGame();
-      } else if (currentLevel > 5 && currentLevel <= 10 && option !== randomQuestion.correctAnswer) {
-        alert("you lost and you walk away with $1,000");
-        resetGame();
-      } else if (currentLevel > 10 && option !== randomQuestion.correctAnswer) {
-        alert("you lost and you walk away with $32,000");
-        resetGame();
-      }
       if (currentLevel + 1 === 16) {
         setWinLose("win");
-        console.log(`user beats the game`);
+        console.log(`User beats the game`);
+      }
+      if (option === randomQuestion.correctAnswer) {
+        setCurrentLevel(currentLevel + 1);
+      } else {
+        //stop timer here
+        console.log(`lose`);
+        if (currentLevel < 5) {
+          setLosingMessage("You lost - That was fast ?!");
+        } else if (currentLevel <= 10) {
+          setLosingMessage("You lost and you walk away with $1,000 !");
+        } else {
+          setLosingMessage("You lost and you walk away with $32,000 !");
+        }
+        setWinLose("lose");
       }
     }
   };
-  // move winning logic to top-order
 
   return (
     <>
@@ -65,9 +74,29 @@ function App() {
           <div className="moneytree">
             <MoneyTree currentLevel={currentLevel} />
           </div>
+
           <Container>
-            <h2>Current level: {currentLevel}</h2>
-            <CountdownTimer initialTime={60} onFinish={resetGame} />
+            {/* <h2>Current level: {currentLevel}</h2> */}
+            {/* <CountDownTimer onFinish={handleReset} setWinLose={setWinLose} /> */}
+
+            {winLose === "win" && (
+              <>
+                <Alert variant="success" style={{ fontSize: "2em", fontWeight: "bold" }}>
+                  Congratulations! You won $1,000,000 !!
+                </Alert>
+                <Button onClick={resetGame}>Reset</Button>
+              </>
+            )}
+
+            {winLose === "lose" ? (
+              <>
+                <Alert variant="danger">{losingMessage}</Alert>
+                <Button onClick={resetGame}>Reset</Button>
+              </>
+            ) : (
+              <CountDownTimer onFinish={handleReset} setWinLose={setWinLose} />
+            )}
+
             <div className="questions">
               {randomQuestion && randomQuestion.level === currentLevel && (
                 <div key={randomQuestion.id} className="question">
@@ -84,7 +113,6 @@ function App() {
             </div>
           </Container>
         </div>
-        {/* {remainingTime} */}
       </div>
     </>
   );
