@@ -4,6 +4,7 @@ import MoneyTree from "./moneytree";
 import QuestionsArrayList from "./questions-list";
 import getRandomQuestion from "./randomquestion.jsx";
 import CountDownTimer from "./countdown-timer.jsx";
+import LifeLineFunctions from "./lifeline.jsx";
 
 function App() {
   const [currentLevel, setCurrentLevel] = useState(1);
@@ -37,7 +38,6 @@ function App() {
       if (option === randomQuestion.correctAnswer) {
         setCurrentLevel(currentLevel + 1);
       } else {
-        //stop timer here
         console.log(`lose`);
         if (currentLevel < 5) {
           setLosingMessage("You lost - That was fast ?!");
