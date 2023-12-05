@@ -171,9 +171,9 @@ const QuestionsArrayList = [
       "HyperText Markup Language",
       "High-Level Text Management Language",
       "Hyperlink and Text Markup Language",
-      "Human Technology Management Language",
+      "Hypertext Transfer Protocol",
     ],
-    correctAnswer: "HyperText Markup Language",
+    correctAnswer: "Hypertext Transfer Protocol",
     level: 7,
   },
   {
